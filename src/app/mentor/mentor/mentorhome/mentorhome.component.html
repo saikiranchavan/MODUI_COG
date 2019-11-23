@@ -1,0 +1,52 @@
+<!-- <button class="btn btn-primary" (click)="getMentorStatus()">Get Mentor Status</button> -->
+<!-- <div *ngIf="clicked"> 
+    <div *ngFor="let item of mentorData">
+    {{item.Mentorname}}
+</div> 
+</div>-->
+<div >
+
+        <h1>{{Acknowledge}}</h1>
+    
+    </div>
+    <div class="card deck">
+            <div *ngFor="let item of mentorData">
+            <div class="card border-dark mb-3">   
+                <div class="card-body">
+                        <div class="row card-item">
+                        <h4 class="card-title col-sm-3">{{item.technologyName}}</h4> 
+                        <table class="table ">
+                            <thead>
+                                <tr class="primary">
+                                        <!-- scope="col-sm-3" -->
+                                    <th >MentorID</th>
+                                    <th >UserID</th>
+                                    <th >Course Timings</th>
+                                    <th >Status</th>
+                                    <th >Progress</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr class="secondary">
+                                        <th scope="row">{{item.mentorID}}</th>
+                                        <td>{{item.startDate|date}}--{{item.endDate|date}}</td>
+                                        <td>{{item.startTime}}--{{item.endTime}}</td>
+                                        <td>{{item.status}}</td>
+                                        <!-- <td>{{item.progress}}</td> -->
+                                        <td>
+                                                <div class="progress col-sm-12">
+                                                        <div class="progress-bar" role="progressbar" [style.width.%]=item.progress aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{item.progress}}%</div>
+                                                </div>
+                                        </td>  
+                                        <!-- <td><button class="btn btn-primary" routerLink="payment">Payment</button></td>              -->
+                                    </tr>
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>             
+            </div>
+            
+        </div>
+        <!-- </div> -->

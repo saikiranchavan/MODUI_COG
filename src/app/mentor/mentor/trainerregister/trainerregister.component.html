@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+  <title>Business Unit</title>
+  <style>
+	.navright{
+		float:left;
+		
+		margin-left:935px;
+		
+	}
+	.wrapper {
+    text-align: center;
+		}
+
+	.button_1 {
+    position: center;
+    
+		}
+  </style>
+  
+ </head>
+ <body>
+	<div class="container-fluid">
+        <h2 style="text-align: center">Mentor Registration</h2>
+		<!-- {{trainerData | json}} -->
+		<p *ngIf="acknow">{{acknowledge}}</p>
+		<form  #mentorform="ngForm" (ngSubmit)="submit()" novalidate >
+            <div class="row">
+			<div class="form-group col-sm-4">
+				<label for="name">Mentor Name</label>
+				<input type="text" #name="ngModel" [class.is-invalid]="name.invalid && name.touched" placeholder="Full Name" name="name" [(ngModel)]="trainerData.mentorName" class="form-control" autofocus required>
+				<small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="user_email">Email</label>
+				<input type="email" [email]="email_init" required #email="ngModel" class="form-control" [class.is-invalid]="email.invalid && email.touched" [(ngModel)]="trainerData.email" placeholder="Email" name="email" required>
+				<!-- <small class="text-danger" [class.d-none]="(email.errors?.required||email.errors?.untouched)">Email is required</small> -->
+				<small class="text-danger" *ngIf="email.errors?.required&& email.touched">Email is required</small>
+				<small class="text-danger" [class.d-none]="!(email.errors?.email || email.errors?.untouched)">Email is invalid</small>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="phone">Phone No.</label>
+				<input type="number" #phone="ngModel" id="phone" pattern ="^[0-9]{10}$" [class.is-invalid]="phone.invalid && (phone.touched||phone.untouched)" class="form-control" name="phone-no" [(ngModel)]="trainerData.mentorPhoneNo" placeholder="phone-no." required>
+				<div *ngIf="phone.errors&&(phone.invalid||phone.touched)">
+					<small class="text-danger" *ngIf="phone.errors.required">Phone number is required </small>
+					<small class="text-danger" *ngIf="phone.errors.pattern">Phone number pattern requires 10 numbers </small>
+				</div>	
+			</div>
+			</div>
+			<div class="row">
+			
+			
+			<div class="form-group col-sm-4">
+				<label for="example-time-input1" > Start time</label>
+				<div class="col-30">
+					<input class="form-control" #date3="ngModel" [class.is-invalid]="date3.invalid && date3.touched" [(ngModel)]="trainerData.startTime" type="number"  value="2" placeholder="start time" name="example-time-input3" required>
+					<small class="text-danger" [class.d-none]="date3.valid || date3.untouched">Start  time is required</small>
+				</div>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="example-time-input2" >End time</label>
+				<div class="col-20">
+					<input class="form-control" #date4="ngModel" [class.is-invalid]="date4.invalid && date4.touched" [(ngModel)]="trainerData.endTime" type="number"  name="example-time-input4" placeholder="end time" required>
+					<small class="text-danger" [class.d-none]="date4.valid || date4.untouched">End time is required</small>
+				</div>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="exper">Experience</label>
+				<input type="number" name="exper" #experience="ngModel" [class.is-invalid]="experience.invalid && experience.touched" name="pass1" [(ngModel)]="trainerData.experience" class="form-control" placeholder="Years of Experience" required>
+				<small class="text-danger" [class.d-none]="experience.valid || experience.untouched">Experience  is required</small>
+			</div>	
+			
+			
+			</div>
+		
+		<div class="row">
+				
+				
+			
+				<div class="form-group col-sm-4">
+						<label for="comment">Profile Description</label>
+						<textarea class="form-control" name="profile_men" #profile="ngModel" [class.is-invalid]="profile.invalid && profile.touched"  [(ngModel)]="trainerData.mentorProfile" class="form-control" placeholder="Profile Description" required rows="4" id="comment"></textarea>
+						<small class="text-danger" [class.d-none]="profile.valid || profile.untouched">Profile Description is required</small>
+				</div>
+			    <div class="form-group col-sm-4">
+				    <label for="sel2">Technology you are familiar with</label>
+					    <select  required class="form-control" #grp="ngModel" [class.is-invalid]="grp.invalid && grp.touched" [(ngModel)]="trainerData.primaryTechnology" name="sellist2" >
+							<option >Select Primary Technology</option>
+							<option *ngFor="let item of Technologies">{{item.technologyName}}</option>
+							
+					    </select>
+					<small class="text-danger" [class.d-none]="grp.valid || grp.untouched">select any one of the technology</small>
+				</div>
+				<div class="form-group col-sm-4">
+					<label for="linked in profile">LinkedIn ProfileId</label>
+					<input type="text" name="linked" #link="ngModel" [class.is-invalid]="link.invalid && link.touched" [(ngModel)]="trainerData.linkedIn" class="form-control" placeholder="LinkedIn ProfileId" required>
+					<small class="text-danger" [class.d-none]="link.valid || link.untouched">linked profile is required is required</small>
+				</div>
+			</div>	
+		<div class="row">
+			
+					
+			
+			<div class="form-group col-sm-4">
+				<label for="password">Password</label>
+				<input type="password" name="password1" #pass1="ngModel" [class.is-invalid]="pass1.invalid && pass1.touched" name="pass1" [(ngModel)]="trainerData.password" class="form-control" placeholder="password" required>
+				<small class="text-danger" [class.d-none]="pass1.valid || pass1.untouched">Password  is required</small>
+			</div>
+			
+			<div class="form-group col-sm-4">
+				<label for="password">Confirm Password</label>
+				<input type="password" name="pass2" #pass2="ngModel" [class.is-invalid]="pass2.invalid && pass2.touched" [(ngModel)]="checkPass" class="form-control" placeholder="password" name="password2"required>
+				<small class="text-danger" [class.d-none]="pass2.valid || pass2.untouched">password is required</small>
+				<small class="text-danger" [class.d-none]="pass1.untouched||pass2.untouched||checkValidate()">passwords are not matching</small>
+			</div>
+			<!-- <div class="form-group col-sm-4">
+				<label for="ffee">Amount(after commission)</label>
+				<input type="number" name="fee_name" #fee="ngModel" [class.is-invalid]="fee.invalid && fee.touched" [(ngModel)]="feesIncom" class="form-control" placeholder="Amount Claim" required>
+				<small class="text-danger" [class.d-none]="fee.valid || fee.untouched"> is required</small>
+				<small class="text-danger" [class.d-none]="fee.untouched||fee.untouched">passwords are not matching</small>
+			</div> -->
+			
+		</div>
+		
+		
+			<div class="wrapper">
+				<!-- {{mentorform.form.invalid}}{{checkValidate()}} -->
+				<button  [disabled]="(mentorform.form.invalid || !(checkValidate()))" type="submit" class="btn btn-primary button_1 col-sm-3" value="submit">Submit</button>
+			</div>
+		</form>
+	</div>
+	
+ </body>
+</html>
+{{trainerData|json}}

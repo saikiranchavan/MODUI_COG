@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=width-device initial-scale=1.0">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  .checked {
+    color: orange;
+  }
+  </style>
+  
+ </head>
+
+<div class="container-fluid">
+<form  #searchForm="ngForm" (ngSubmit)="submit()">
+    <div class="row">
+
+    <div class="form-group col-sm-12">
+        <label for="sel2">Search Technology</label>
+            <select  required class="form-control" #grp="ngModel" [class.is-invalid]="grp.invalid && grp.touched" [(ngModel)]="training.technologyName" name="sellist2" >
+                <option>Select Any of the Technology</option>    
+                <option *ngFor="let item of Technologies">{{item.technologyName}}</option>    
+                
+                <!-- <option selected>Cloud Computing</option>
+                <option>Mean Stack</option>
+                <option>Data Analytics</option>
+                <option>AI Robotics</option>
+                <option>Data Science</option> -->
+            </select>
+        <small class="text-danger" [class.d-none]="grp.valid || grp.untouched">select any one of the technology</small>
+    </div>
+    <!-- <div class="col-sm-4"></div>         -->
+    <div class="form-group col-sm-4">
+        <label for="start">Start Date</label>
+        <input class="form-control " #startdate="ngModel" [(ngModel)]="training.startDate" type="date" [class.is-invalid]="startdate.invalid && startdate.touched" name="sdate" placeholder="months" required>
+        <small class="text-danger" [class.d-none]="startdate.valid || startdate.untouched">Start Date is required</small>
+
+    </div>
+    <div class="form-group col-sm-4">
+        <label for="start">End Date</label>
+        <input class="form-control " type="date" #enddate="ngModel" [class.is-invalid]="enddate.invalid && enddate.touched" [(ngModel)]="training.endDate" name="edate" placeholder="months" required>
+        <small class="text-danger" [class.d-none]="enddate.valid || enddate.untouched">End date is required</small>
+
+    </div>
+    <div class="form-group col-sm-4">
+        <label for="sel2">Time Slot For Training</label>
+            <select  required class="form-control" #grp="ngModel" [class.is-invalid]="grp.invalid && grp.touched" [(ngModel)]="start_time_string" name="sellist2" >
+                
+                <option >2 TO 4</option>
+                <option>4 TO 6</option>
+                <option>6 TO 8</option>
+                <option>8 TO 10</option>
+                <option>10 TO 12</option>
+            </select>
+        <small class="text-danger" [class.d-none]="grp.valid || grp.untouched">select any one of the time slot</small>
+    </div>
+        <!-- <div class="form-group col-sm-3">
+            <label for="timestart">Start Time</label>
+            <input class="form-control" type="number"#starttime="ngModel" [(ngModel)]="start_time_string" name="stime" [class.is-invalid]="starttime.invalid && starttime.touched" value="0" id="example-time-input" required>
+            <small class="text-danger" [class.d-none]="starttime.valid || starttime.untouched">Start time is required</small>
+
+			
+        </div> -->
+        <!-- <div class="form-group col-sm-3">
+            <label for="timestart">End Time</label>
+            <input class="form-control" type="number" #endtime="ngModel" name="etime" [class.is-invalid]="endtime.invalid && endtime.touched"  [(ngModel)]="end_time_string" value="0" id="example-time-input" required>
+            <small class="text-danger" [class.d-none]="endtime.valid || endtime.untouched">End time is required</small>
+
+        </div>     -->
+    </div>
+    <div class="wrapper">
+     <a><button type="submit"  [disabled]="searchForm.form.invalid" class="btn btn-primary button" >Search</button></a>
+    </div>
+
+
+    <!-- <ul>
+        <li *ngFor="let item of mentorSearchResult">
+                {{item.Mentorname}}<br>
+                {{item.Email}}<br>
+                {{item.Phoneno}}<br>
+                {{item.StartDate}}<br>
+                {{item.EndDate}}<br>
+                {{item.Starttime_hour}}<br>
+                {{item.Starttime_min}}<br>
+                {{item.Endtime_hour}}<br>
+                {{item.Endtime_min}}<br>
+                {{item.technologies}}<br>
+                {{item.Linked}}<br>
+                {{item.Password}}<br>
+                {{item.experience}}<br>
+                {{item.profile}}<br>
+                {{item.rating}}
+        </li>
+    </ul> -->
+       
+</form>
+
+
+
+<div class="card-deck">
+    <div *ngFor="let item of mentorSearchResult;let i=index">        
+            
+        <div class="card col-sm-12 " style="margin-top:15px ;margin-left:60px ;width:400px;">
+            <img *ngIf="i%3==0" class="card-img-top" src="../../../assets/images/img_avatar3_1.png" alt="card image">
+            <img *ngIf="i%3==1" class="card-img-top" src="../../../assets/images/img_avatar5.png" alt="card image">
+            <img *ngIf="i%3==2" class="card-img-top" src="../../../assets/images/img_avatar1.png" alt="card image">
+            <div class="card-body">
+                
+                
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h4 class="card-title">{{item.mentorName}}</h4>
+                        <p class="card-text">{{item.mentorProfile}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 class="card-subtitle">Years of Experience:</h6>
+                        <p class="card-text">{{item.experience}}</p>
+                    </li>
+                    <li class="list-group-item">
+                        <h6 class="card-subtitle">Technology Known:</h6>
+                        <ul>
+                        
+                            <li>
+                                {{item.primaryTechnology}}
+                            </li>
+                            
+                        </ul>
+
+                    </li>
+                    <!-- <li class="list-group-item">
+                        <h6 class="car-subtitle">Fee Charged:</h6>
+                    <p class="card-text">{{item.fees}}</p>
+                    </li> -->
+                    <!-- <li class="list-group-item">
+                            <span></span>
+                            <h6 class="car-subtitle">Rating:</h6>
+                            <div *ngFor="let r of rating_array">
+                                <span class="fa fa-star checked"></span>
+                            </div>
+       
+                    </li> -->
+                  </ul>
+                  
+                  <div *ngIf="!proposed[i]">
+
+                        <a  class="btn btn-primary" (click)=check(i) style="color:white">Propose</a> 
+                  </div>
+                  <div *ngIf="proposed[i]">
+                              <a  class="btn btn-primary" style="color:black; margin-right:90px" disabled >Proposed</a> 
+                              <a  class="btn btn-primary" style="color:white; ">Cancel</a>  
+                  </div>
+            </div>
+            <div class="card-footer" *ngIf="proposed">
+                    <small class="text-muted">Last Proposed 3 days ago</small>
+                </div>
+        </div>
+    </div>
+    <hr>
+</div>     
+</div>
+</html>

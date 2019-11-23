@@ -1,0 +1,45 @@
+
+<div >
+
+        <h1>{{Acknowledge}}</h1>
+        
+    </div>
+    <div class="card deck">
+            <div *ngFor="let item of userData let i=index">
+            <div class="card border-dark mb-3">   
+                <div class="card-body">
+                        <div class="row card-item">
+                        <h4 class="card-title col-sm-3">{{item.userName}}</h4> 
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                        <!-- scope="col-sm-3" -->
+                                    <th >UserID</th>
+                                    <th >UserEmail</th>
+                                    <th >userPhoneno</th>
+                                    <th >UserBlock</th>
+                                    <th >Delete</th>
+                                    
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <th scope="row">{{item.uid}}</th>
+                                        <td>{{item.userEmail}}</td>
+                                        <td>{{item.userPhoneNo}}</td>
+                                        <td *ngIf="!BlockBool[i]"><button class="btn btn-danger"  (click)="BlockUser(i)">Block</button></td>              
+                                        <td *ngIf="BlockBool[i]"><button class="btn btn-success"  (click)="BlockUser(i)">UnBlock</button></td>              
+                                        <td><button class="btn btn-primary" (click)="DeleteUser(i)" >Delete</button></td>              
+                                    </tr>
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>             
+            </div>
+            
+        </div>
+        <!-- </div> -->
+
+        

@@ -1,0 +1,43 @@
+<div >
+
+        <h1>{{Acknowledge}}</h1>
+    
+    </div>
+    <div class="card deck">
+            <div *ngFor="let item of Pdata">
+            <div class="card border-dark mb-3">   
+                <div class="card-body">
+                        <div class="row card-item">
+                        <h4 class="card-title col-sm-3">{{item.technologyName}}</h4> 
+                        <table class="table ">
+                            <thead>
+                                <tr>
+                                        <!-- scope="col-sm-3" -->
+                                    <th >UserID</th>
+                                    <th>MentorID</th>
+                                    <th >Start Date</th>
+                                    <th >End Date</th>
+                                    <th >Payment Received</th>
+                                    <th>Mentor Payment</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <th scope="row">{{item.userID}}</th>
+                                        <th>{{item.mentorID}}</th>
+                                        <td>{{item.startDate|date}}</td>
+                                        <td>{{item.endDate|date}}</td>
+                                        <td>{{item.amount}}</td>
+                                        <td>{{item.mentor_Amount}}</td>
+                                        
+                                    </tr>
+                                    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>             
+            </div>
+            
+        </div>
+        <!-- </div> -->

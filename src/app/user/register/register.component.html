@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width initial-scale=1.0">
+  
+  <title>Business Unit</title>
+  <style>
+	.navright{
+		float:left;
+		
+		margin-left:935px;
+		
+	}
+  </style>
+  </head>
+ <body>
+	<div class="container-fluid">
+            <h2 style="text-align:center">User Registration</h2>   
+			<p *ngIf="acknow">{{acknowledge}}</p>
+		<form #userform="ngForm" (ngSubmit)="submit()" style="width:300px;">
+            <div class="form-group">
+				<label for="name">User Name</label>
+				<input type="text" #name="ngModel" [class.is-invalid]="name.invalid && name.touched" placeholder="Full Name" name="Username" [(ngModel)]="userData.userName" id="name" class="form-control" autofocus required>
+				<small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is required</small>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label>
+				<input type="text" email #email="ngModel" [class.is-invalid]="email.invalid && email.touched" placeholder="Email" name="Email" [(ngModel)]="userData.userEmail" id="name" class="form-control" autofocus required>
+				<small class="text-danger" [class.d-none]="!(email.errors?.email || email.errors?.untouched)">Email is invalid</small>
+				<small class="text-danger" *ngIf="email.errors?.required&& email.touched">Email is required</small>
+
+				<!-- <small class="text-danger" [class.d-none]="email.valid || email.untouched">Email is required</small> -->
+			</div>
+			<div class="form-group">
+				<label for="number">Phone No.</label>
+				<input type="number" #phone="ngModel" id="phone" pattern ="^[0-9]{10}$" [class.is-invalid]="phone.invalid && (phone.touched||phone.untouched)" class="form-control" name="Phoneno" [(ngModel)]="userData.userPhoneNo" placeholder="phone-no." required>
+				<div *ngIf="phone.errors&&(phone.invalid||phone.touched)">
+					<small class="text-danger" *ngIf="phone.errors.required">Phone number is required </small>
+					<small class="text-danger" *ngIf="phone.errors.pattern">Phone number pattern requires 10 numbers </small>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" #pass1="ngModel" [class.is-invalid]="pass1.invalid && pass1.touched" placeholder="Password" name="Password" [(ngModel)]="userData.password" id="name" class="form-control" autofocus required>
+				<small class="text-danger" [class.d-none]="pass1.valid || pass1.untouched">Password is required</small>
+			</div>
+			<div class="form-group">
+				<label for="password">Confirm Password</label>
+				<input type="password" #pass2="ngModel" [class.is-invalid]="pass2.invalid && pass2.touched" placeholder="Confirm password" name="pass2" [(ngModel)]="checkPass" id="name" class="form-control" autofocus required>
+				<small class="text-danger" [class.d-none]="pass2.valid || pass2.untouched">Password is required</small>
+				<small class="text-danger" [class.d-none]="pass1.untouched||pass2.untouched||checkValidate()">passwords are not matching</small>
+			</div>
+			<button type="submit"  [disabled]="userform.form.invalid||!checkValidate()"class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+	
+ </body>
+</html>
+{{userData|json}}
