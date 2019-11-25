@@ -74,4 +74,8 @@ export class UserregisterService {
    DeleteUser(id){
      return this.http.delete("http://localhost:12345/User/DeleteUser/"+id);
    }
+
+   AddRating(id,rating){
+     return this.http.put("http://localhost:12345/Training/UpdateTrainingRating/"+id+"/"+rating,{});
+   }
 }

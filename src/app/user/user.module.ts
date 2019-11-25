@@ -8,6 +8,7 @@ import { MentorStatusComponent } from './MentorStatusDetails/mentor-status/mento
 import { RegisterComponent } from './register/register.component';
 import {HttpClientModule} from '@angular/common/http';
 import { MentorCompletedStatusComponent } from './MentorStatusDetails/mentor-completed-status/mentor-completed-status.component';
+import { FormsModule } from '@angular/forms';
 //import { MentorCurrentStatusComponent } from './MentorStatusDetails/mentor-current-status/mentor-current-status.component';
 
 
@@ -20,6 +21,7 @@ import { MentorCompletedStatusComponent } from './MentorStatusDetails/mentor-com
   imports: [
     CommonModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forChild([
       {path:'register/user_register',component:RegisterComponent},
       {path:"user/mentor_search",component:MentorsearchComponent},

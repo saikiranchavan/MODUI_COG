@@ -17,11 +17,13 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     RouterModule.forChild([
-      {path:'register/trainer_register',component:TrainerregisterComponent},
-      {path:'mentorhome',component:MentorhomeComponent},
-      {path:'User_status',component:StatusComponent},
-      {path:'User_status_complete',component:StatusCompletedComponent},
-      {path:'payment',component:PaymentComponent}
+      {path:'mentorhome',component:MentorhomeComponent,children:
+      [
+        {path:'User_status',component:StatusComponent},
+        {path:'User_status_complete',component:StatusCompletedComponent},
+        {path:'payment',component:PaymentComponent}
+      ]},
+      {path:'register/trainer_register',component:TrainerregisterComponent}
     ])
   ]
 })

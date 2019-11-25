@@ -25,13 +25,21 @@ export class MentorCompletedStatusComponent implements OnInit {
   i=0;
   Acknowledge;
   a;
+  rating;
+  SelectCheck:boolean[];
   ngOnInit() {
     this.a=this.localsto.retrieve("user");
     this.userService.GetAllCompletedTrainings(this.a["userID"]).subscribe(data=>{
       if(data==0){
         this.Acknowledge="You dont have any Completed Training";
       }
-      this.mentorData=data;
+      else{
+        this.mentorData=data;
+        this.SelectCheck=new Array(this.mentorData.length);
+        this.SelectCheck.forEach(element => {
+          element=false;
+        });
+      }
     });
   }
 
@@ -55,6 +63,14 @@ export class MentorCompletedStatusComponent implements OnInit {
       this.router.navigateByUrl('mentor_status_complete/payment');
     });
     
+  }
+
+  RatingMentor(id:number){
+    this.userService.AddRating(id,this.rating).subscribe();
+  }
+
+  editBool(i){
+    this.SelectCheck[i]=true;
   }
 
 }

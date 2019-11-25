@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   rating_array=[];
   userdata;
   proposed :boolean[];
+  Acknowledge;
   check(c){
     console.log("iam here to see whether ur logged in");
     if(!this.commonService.checkLocalToken()){
@@ -72,32 +73,42 @@ export class HomeComponent implements OnInit {
     this.training.endTime=this.end_time;
     this.userService.SearchMentor(this.training.technologyName,this.start_time,this.end_time).subscribe(
       data=>{
-        console.log(data);
-        var i=0;
-       
-        this.mentorSearchResult=data;
-        
-        this.proposed=new Array(this.mentorSearchResult.length);
-       
-        for(i;i<this.mentorSearchResult.length;i++){
-          this.proposed[i]=false;
-        }
-        
-        if(this.mentorSearchResult.rating>0&&this.mentorSearchResult.rating<=5){
-          this.rating_array=Array(this.mentorSearchResult.rating).fill(3);
+        if(data==null||data==0){
+          this.Acknowledge="There is No Trainer available either in this Technology or this specific Time Slot";
         }
         else{
-          this.rating_array=[];
+          console.log(data);
+          var i=0;
+        
+          this.mentorSearchResult=data;
+          
+          this.proposed=new Array(this.mentorSearchResult.length);
+        
+          for(i;i<this.mentorSearchResult.length;i++){
+            this.proposed[i]=false;
+          }
+          
+          if(this.mentorSearchResult.rating>0&&this.mentorSearchResult.rating<=5){
+            this.rating_array=Array(this.mentorSearchResult.rating).fill(3);
+          }
+          else{
+            this.rating_array=[];
+          }
         }
       },
       err=>{
-        console.log("no search data is found");
+        //console.log("no search data is found");
+        this.Acknowledge="There is No Trainer available either in this Technology or this specific Time Slot"
       });
   }
   ngOnInit() {
       this.userService.GetTechnologies().subscribe(data=>{
+        
         this.Technologies=data;
         console.log(this.Technologies);
+      },
+      err=>{
+        this.Acknowledge="There is No Trainer available either in this Technology or this specific Time Slot"
       });
   }
 

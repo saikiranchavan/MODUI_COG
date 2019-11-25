@@ -23,4 +23,8 @@ export class AdminService {
   AddTechnology(object){
     return this.http.post("http://localhost:12345/Technology/AddTech",object);
   }
+
+  DeleteTech(i:number){
+    return this.http.delete("http://localhost:12345/Technology/DeleteTechnology/"+i);
+  }
 }

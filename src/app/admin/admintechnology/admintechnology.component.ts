@@ -55,4 +55,10 @@ export class AdmintechnologyComponent implements OnInit {
 
   }
 
+  DeleteTech(i:number){
+    this.adminService.DeleteTech(i).subscribe(data=>{
+      console.log(data);
+    });
+  }
+
 }
